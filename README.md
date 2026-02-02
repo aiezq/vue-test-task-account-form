@@ -1,5 +1,53 @@
-# Vue 3 + TypeScript + Vite
+# Форма управления учетными записями
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Небольшое приложение на Vue 3 для управления списком учетных записей. Реализована форма добавления и редактирования записей с валидацией, хранением в Pinia и сохранением в `localStorage`.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Возможности
+
+- Добавление и удаление учетных записей.
+- Поля: Метка (необязательное, до 50 символов), Тип записи (LDAP/Локальная), Логин (обязательное, до 100 символов), Пароль (обязательное для Локальной, до 100 символов).
+- При выборе LDAP поле «Пароль» скрывается, значение сохраняется как `null`.
+- Метки вводятся через `;` и сохраняются как массив объектов вида `{ text: '...' }`.
+- Валидация выполняется по `blur` для текстовых полей и по изменению для селекта.
+- Данные сохраняются в `localStorage` и восстанавливаются при обновлении страницы.
+
+## Стек
+
+- Vue 3 + Composition API
+- TypeScript
+- Pinia
+- Vite
+
+## Установка и запуск
+
+1. Установить зависимости:
+
+```bash
+pnpm install
+```
+
+2. Запустить dev-сервер:
+
+```bash
+pnpm dev
+```
+
+Открыть в браузере адрес, который выведет Vite (обычно `http://localhost:5173`).
+
+## Сборка
+
+```bash
+pnpm build
+```
+
+## Структура проекта
+
+- `src/App.vue` — контейнер и логика формы.
+- `src/components/AccountsHeader.vue` — шапка с кнопкой добавления.
+- `src/components/AccountsHint.vue` — подсказка для поля «Метка».
+- `src/components/AccountsTable.vue` — таблица записей и ввод данных.
+- `src/stores/accounts.ts` — Pinia store с сохранением в `localStorage`.
+
+## Примечания
+
+- Для очистки данных достаточно удалить запись `vue-test-task-accounts` из `localStorage`.
